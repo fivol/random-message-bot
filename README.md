@@ -52,11 +52,14 @@
      для получения уведомлений об ошибках
    - `BOT_API_TOKEN` Telegram bot api token  
    - `PG_URL` URL для подключения к базе данных Postgres
+   - `HOST` url хоста, на котором будет запущен бот, для установления веб хуков, если DEBUG=True, используется
+   `pooling` вместо `set_webhook`
 ```dotenv
-DEBUG=True
+DEBUG=
 ALARMER_KEY=
 BOT_API_TOKEN=
 PG_URL=
+HOST=
 ```
 3. Для развертки бота следует указать те же самые переменные окружения, за исключением `DEBUG=False`
 3. `Procfile` содержит указания для heroku по запуску

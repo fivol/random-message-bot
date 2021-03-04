@@ -23,5 +23,5 @@ BOT_ID = int(BOT_API_TOKEN.split(':')[0])
 DEBUG = os.getenv('DEBUG', False)
 if 'DYNO' in os.environ:
     DEBUG = False
-HOST = 'https://random-message-bot.herokuapp.com/'
+HOST = os.getenv('HOST')
 ADMIN_KEY = '610'
