@@ -16,7 +16,7 @@ DB_PORT = re.search(r':(\d+)/', PG_URL).group(1)
 DB_NAME = re.search(r'/([a-z-]+)$', PG_URL).group(1)
 
 BOT_API_TOKEN = os.getenv('BOT_API_TOKEN')
-ALARMER_KEY = os.getenv('ALARMER_KEY', '104839-00cc49-791ee0')
+ALARMER_KEY = os.getenv('ALARMER_KEY')
 BOT_ID = int(BOT_API_TOKEN.split(':')[0])
 
 
@@ -24,4 +24,5 @@ DEBUG = os.getenv('DEBUG', False)
 if 'DYNO' in os.environ:
     DEBUG = False
 HOST = os.getenv('HOST')
-ADMIN_KEY = '610'
+
+ADMIN_KEY = os.getenv('ADMIN_KEY')
