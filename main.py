@@ -13,5 +13,5 @@ if __name__ == "__main__":
     else:
         create_tables()
         app.run(host="0.0.0.0", debug=DEBUG, port=int(os.environ.get('PORT', 5000)))
-        bot.remove_webhook()
+        # bot.remove_webhook()
         bot.set_webhook(url=HOST + BOT_API_TOKEN)
