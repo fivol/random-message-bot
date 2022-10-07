@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  app:
+    build: .
+    restart: always
+    network_mode: host
+    environment:
+      BOT_API_TOKEN: 977369698:AAEP2kR8dFVAHAT-A9qQikwLC9iz7bTi_dg
+      PG_URL: postgresql://postgres:ODSIFJdsfioe345ffjs@62.109.27.174:5432
