@@ -6,4 +6,4 @@ services:
     network_mode: host
     environment:
       BOT_API_TOKEN: ***REMOVED***
-      PG_URL: postgresql://postgres:***REMOVED***@db.example.com:5432
+      PG_URL: postgresql://postgres:***REMOVED***@db.example.com:5432/random_message
