@@ -13,7 +13,7 @@ DB_USER = re.search(r'//(\w+):', PG_URL).group(1)
 DB_PASS = re.search(r':(\w+)@', PG_URL).group(1)
 DB_HOST = re.search(r'@(\S+):', PG_URL).group(1)
 DB_PORT = re.search(r':(\d+)/', PG_URL).group(1)
-DB_NAME = re.search(r'/([a-z-]+)$', PG_URL).group(1)
+DB_NAME = re.search(r'/([a-z-_]+)$', PG_URL).group(1)
 
 BOT_API_TOKEN = os.getenv('BOT_API_TOKEN')
 ALARMER_KEY = os.getenv('ALARMER_KEY')
