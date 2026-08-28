@@ -55,7 +55,11 @@ docker compose up -d --build
 | `BOT_API_TOKEN` | yes | Telegram bot token from [@BotFather](https://t.me/BotFather) |
 | `PG_URL` | yes | `postgresql://user:pass@host:5432/db` |
 | `ALARMER_KEY` | no | Key for [@alarmer_bot](https://t.me/alarmer_bot) crash alerts |
+| `ADMIN_KEY` | no | Passphrase that unlocks usage stats over chat |
+| `HOST` | no | Public URL, for webhook mode |
 | `DEBUG` | no | Verbose logging |
+
+Full developer notes: [docs/DEV.md](docs/DEV.md).
 
 ## License
 
