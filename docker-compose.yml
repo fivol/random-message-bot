@@ -1,9 +1,21 @@
 version: "3.3"
+volumes:
+  postgres:
+
 services:
   app:
     build: .
     restart: always
-    network_mode: host
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: always
     environment:
-      BOT_API_TOKEN: ***REMOVED***
-      PG_URL: postgresql://postgres:***REMOVED***@db.example.com:5432/random_message
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: random_message
+    volumes:
+      - postgres:/var/lib/postgresql/data

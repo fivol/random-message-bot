@@ -1,69 +1,62 @@
----
-description: >-
-  Телеграм бот для общения со случайными незнакомцами, создания своих или
-  просмотра чужих публикаций
----
+# random-message-bot
 
-# RandomMessageBot
+A Telegram bot for anonymous exchange between strangers. You send a message —
+text, voice, photo, video note — it goes into a shared pool and reaches someone
+else. They can reply to it, you can reply back, and neither of you learns who
+the other is.
 
-> [@random\_message\_bot](https://t.me/random_message_bot)
+Live bot: [@random_message_bot](https://t.me/random_message_bot).
+The bot speaks Russian; the code and docs are in English.
+The original product description (RU) is kept at [docs/README.ru.md](docs/README.ru.md).
 
-## Команды
+## Features
 
-* `/start` зарегистрироваться и показать приветственное сообщение \(`/help` делает то же
+- **Anonymous threads** — swipe-reply to a received message to answer its
+  author; the reply itself can be answered, so a whole conversation can happen
+  without either side having a handle to the other.
+- **Any content** — voice messages, photos, video notes, text.
+- **Feedback loop** — every delivered message can be marked spam / liked /
+  disliked. Spam drops its delivery odds sharply; likes and dislikes tune what
+  each person is shown next.
+- **Commands** — `/start`, `/help`, `/get` (pull a random message), and
+  `/support` to reach the author.
 
-  самое для существующих пользователей\)
+## Layout
 
-* `/help` справка по работе бота и список существующих команд
-* `/get` получения случайного сообщения
-* Добавь к тексту `/support`, чтобы написать в поддержку
+```
+main.py            # entry point: creates tables, starts polling
+app/
+  bot.py           # handlers, delivery and reaction logic (pyTelegramBotAPI)
+  sql.py           # PostgreSQL queries: pool, reactions, ranking
+  config.py        # environment parsing
+  constants.py
+docs/DEV.md        # developer notes
+```
 
-## Функционал
+## Run it
 
-1. Отправить сообщение с каким-либо контентом \(voice, photo, video\_note\),
+```bash
+cp .env.example .env      # fill in BOT_API_TOKEN and PG_URL
+pip install -r requirements.txt
+python main.py
+```
 
-   оно будет добавлено в единую базу, откуда присылается другим людям
+With Docker:
 
-2. Можно переслать полученное сообщение обратно боту \(свайп влево\) со своим комментарием 
+```bash
+cp .env.example .env
+docker compose up -d --build
+```
 
-   \(необязательно текстовым\), чтобы ответить его автору
+## Configuration
 
-   * Это может быть просто реакция на контент: критика, замечание, комментарий, вопрос, уточнение и тд
-   * Анонимный диалог, так как на ответ можно также отвечать, кроме как прислать в тексте контакты
+| Variable | Required | What it is |
+|---|---|---|
+| `BOT_API_TOKEN` | yes | Telegram bot token from [@BotFather](https://t.me/BotFather) |
+| `PG_URL` | yes | `postgresql://user:pass@host:5432/db` |
+| `ALARMER_KEY` | no | Key for [@alarmer_bot](https://t.me/alarmer_bot) crash alerts |
+| `DEBUG` | no | Verbose logging |
 
-     нет возможности понять, кто на обратном конце
+## License
 
-   * Анонимное послание или обращение
-
-3. В ответ на каждое полученное от бота сообщение, можно отреагировать с 
-
-   помощью одной из четырех кнопок
-
-   * Спам. Отметит его как нежелательное и сильно уменьшит вероятность показа другим
-   * Дизлайк, лайк. Информирует систему о личных предпочтениях. Изменяет шанс показа аудитории
-
-![](https://files.catbox.moe/ropsr2.png)
-
-## Примеры использования
-
-1. Задать вопрос и получить ответы
-2. Рассказать в аудио или видео сообщении интересную историю
-3. Поделиться уникальным авторским контентом
-
-## Логика
-
-1. При выдаче результата учитывается
-   * Количество положительных / отрицательных оценок
-   * Количество жалоб на спам
-   * Время публикации. Старые все реже показываются
-2. Бот может запросить ваши публикации для того, чтобы продолжить 
-
-   просмотр других с целью мотивации создания контента, для просмотра
-
-   вам доступно количество, пропорциональное квадрату отправленных
-
-## Создание
-
-1. Телеграм бот написан в 2019 году
-2. В основе лежит библиотека pyTelegramBotAPI
-
+MIT — see [LICENSE](LICENSE).
